@@ -42,3 +42,5 @@ swagger local con la documentacion de todos los endpoints expuesto por la API
 
 http://localhost:8080/api
 
+Para los endpoints de get les dejo la posibilidad que si las personas me envían un rango de fechas distintos al mes, tome ese rango y no un rango de 30 días.
+Además les agrego la posibilidad de poder paginar los resultados, para no devolver a memoria demasiadas cosas en el caso de que los selects devuelvan demasiados registros.
