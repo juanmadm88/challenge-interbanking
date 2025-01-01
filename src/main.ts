@@ -33,7 +33,7 @@ async function bootstrap() {
 
   const app = await (isFastify ? initFastify() : initExpress());
 
-  const config = new DocumentBuilder().setTitle('Company example').setDescription('The Challenge Interbanking API description').setVersion('1.0').addTag('Transport').build();
+  const config = new DocumentBuilder().setTitle('Company example').setDescription('The Challenge Interbanking API description').setVersion('1.0').addTag('Company').build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 

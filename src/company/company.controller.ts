@@ -8,6 +8,7 @@ import { CompanyDTO } from './dtos/company.dto';
 import { FindQueryOptions, QueryParamsCompany } from '../constants/common';
 import { VerifyPaginationInterceptor } from '../interceptor/verify-pagination.interceptor';
 import { VerifyCompanyParamsInterceptor } from '../interceptor/verify-company-params.interceptor';
+import { VerifyIdInterceptor } from '../interceptor/verify-id.interceptor';
 
 @ApiTags('Company')
 @Controller('company')
@@ -162,6 +163,7 @@ export class CompanyController {
   @ApiOperation({ summary: 'Find a Company by Id ' })
   @ApiInternalServerErrorResponse()
   @ApiUnauthorizedResponse()
+  @ApiBadRequestResponse()
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'The Company has been found successfully.'
@@ -182,6 +184,7 @@ export class CompanyController {
     required: true
   })
   @Get('/:id')
+  @UseInterceptors(VerifyIdInterceptor)
   async getById(@Headers('unique-trace-id') uniqueTraceId: string, @Param('id') id: number) {
     this.logger.log({
       level: 'info',
