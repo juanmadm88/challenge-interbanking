@@ -1,0 +1,497 @@
+{
+	"info": {
+		"_postman_id": "f726ac31-a500-481e-884c-9a2f2cc30ba2",
+		"name": "challenge-interbanking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "health",
+			"item": [
+				{
+					"name": "check api status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/health",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"health"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Create new Company",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "app_key",
+						"value": "INTERBANKING_CHALLENGE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"createDate\": \"2024-12-31T17:27:16.014Z\",\n    \"bussinessName\": \"empresa ok\",\n    \"cuit\": \"20342952154\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/challenge-interbanking/company",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"challenge-interbanking",
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "expected an Unauthorized 401 Error",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"createDate\": \"2024-12-31T17:27:16.014Z\",\n    \"bussinessName\": \"empresa prueba\",\n    \"cuit\": \"2034295207\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/challenge-interbanking/company",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"challenge-interbanking",
+						"company"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find all companies",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "app_key",
+						"value": "INTERBANKING_CHALLENGE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/v1/challenge-interbanking/company",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"challenge-interbanking",
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "expected an Internal 500 Server Error when trying to create a company with an existing cuit",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "app_key",
+						"value": "INTERBANKING_CHALLENGE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"createDate\": \"2024-12-31T17:27:16.014Z\",\n    \"bussinessName\": \"empresa prueba 2\",\n    \"cuit\": \"21714761524\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/challenge-interbanking/company",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"challenge-interbanking",
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find all companies with pagination",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "app_key",
+						"value": "INTERBANKING_CHALLENGE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/v1/challenge-interbanking/company?skip=1&size=2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"challenge-interbanking",
+						"company"
+					],
+					"query": [
+						{
+							"key": "skip",
+							"value": "1"
+						},
+						{
+							"key": "size",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find all companies between dates",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "app_key",
+						"value": "INTERBANKING_CHALLENGE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/v1/challenge-interbanking/company?createDateSince=2024-12-11T10:00:00.014Z&createDateTo=2024-12-31T17:27:16.014Z",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"challenge-interbanking",
+						"company"
+					],
+					"query": [
+						{
+							"key": "createDateSince",
+							"value": "2024-12-11T10:00:00.014Z"
+						},
+						{
+							"key": "createDateTo",
+							"value": "2024-12-31T17:27:16.014Z"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "expected a Bad Request 400 Error when sending wrong type value as a pagination param",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "app_key",
+						"value": "INTERBANKING_CHALLENGE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/v1/challenge-interbanking/company?skip=1&size=tres",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"challenge-interbanking",
+						"company"
+					],
+					"query": [
+						{
+							"key": "skip",
+							"value": "1"
+						},
+						{
+							"key": "size",
+							"value": "tres"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "expected a Bad Request 400 Error when sending not a valid Iso String as param",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "app_key",
+						"value": "INTERBANKING_CHALLENGE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/v1/challenge-interbanking/company?createDateSince=2024-12-11T10:00:00.014Z&createDateTo=sarasa",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"challenge-interbanking",
+						"company"
+					],
+					"query": [
+						{
+							"key": "createDateSince",
+							"value": "2024-12-11T10:00:00.014Z"
+						},
+						{
+							"key": "createDateTo",
+							"value": "sarasa"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "expecte a Bad Request 400 Error when createDateSince is later than createDateTo",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "app_key",
+						"value": "INTERBANKING_CHALLENGE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/v1/challenge-interbanking/company?createDateSince=2024-12-11T10:00:00.014Z&createDateTo=2024-10-25T17:27:16.014Z",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"challenge-interbanking",
+						"company"
+					],
+					"query": [
+						{
+							"key": "createDateSince",
+							"value": "2024-12-11T10:00:00.014Z"
+						},
+						{
+							"key": "createDateTo",
+							"value": "2024-10-25T17:27:16.014Z"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "expected a Bad Request 400 Error when cuit length is not 11",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "app_key",
+						"value": "INTERBANKING_CHALLENGE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"createDate\": \"2024-12-31T17:27:16.014Z\",\n    \"bussinessName\": \"empresa prueba 2\",\n    \"cuit\": \"2034295215\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/challenge-interbanking/company",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"challenge-interbanking",
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "expected a Bad Request 400 Error when create date is not a valid Iso String ",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "app_key",
+						"value": "INTERBANKING_CHALLENGE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"createDate\": \"sarasa\",\n    \"bussinessName\": \"empresa ok\",\n    \"cuit\": \"20342952152\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/challenge-interbanking/company",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"challenge-interbanking",
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find a company by id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "app_key",
+						"value": "INTERBANKING_CHALLENGE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/v1/challenge-interbanking/company/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"challenge-interbanking",
+						"company",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find all companies by transactions transfer date field between dates",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "app_key",
+						"value": "INTERBANKING_CHALLENGE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/v1/challenge-interbanking/company/transactions?transferDateSince=2024-10-11T10:00:00.014Z&transferDateTo=2024-12-31T17:27:16.014Z",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"challenge-interbanking",
+						"company",
+						"transactions"
+					],
+					"query": [
+						{
+							"key": "transferDateSince",
+							"value": "2024-10-11T10:00:00.014Z"
+						},
+						{
+							"key": "transferDateTo",
+							"value": "2024-12-31T17:27:16.014Z"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
