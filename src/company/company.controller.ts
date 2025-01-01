@@ -9,6 +9,7 @@ import { FindQueryOptions, QueryParamsCompany } from '../constants/common';
 import { VerifyPaginationInterceptor } from '../interceptor/verify-pagination.interceptor';
 import { VerifyCompanyParamsInterceptor } from '../interceptor/verify-company-params.interceptor';
 import { VerifyIdInterceptor } from '../interceptor/verify-id.interceptor';
+import { VerifyTransactionParamsInterceptor } from '../interceptor/verify-transaction-params.interceptor';
 
 @ApiTags('Company')
 @Controller('company')
@@ -147,7 +148,7 @@ export class CompanyController {
     description: 'Transfer date up to find '
   })
   @Get('/transactions')
-  @UseInterceptors(VerifyPaginationInterceptor)
+  @UseInterceptors(VerifyPaginationInterceptor, VerifyTransactionParamsInterceptor)
   async getByTransactions(@Headers('unique-trace-id') uniqueTraceId: string, @Query() params?: QueryParamsCompany) {
     this.logger.log({
       level: 'info',

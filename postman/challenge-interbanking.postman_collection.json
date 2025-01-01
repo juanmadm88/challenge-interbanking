@@ -520,6 +520,44 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "expected a Bad Request 400 Error when transferDateSince is later than transferDateTo",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "app_key",
+						"value": "INTERBANKING_CHALLENGE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/v1/challenge-interbanking/company/transactions?transferDateSince=2024-10-11T10:00:00.014Z&transferDateTo=2024-09-27T17:27:16.014Z",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"challenge-interbanking",
+						"company",
+						"transactions"
+					],
+					"query": [
+						{
+							"key": "transferDateSince",
+							"value": "2024-10-11T10:00:00.014Z"
+						},
+						{
+							"key": "transferDateTo",
+							"value": "2024-09-27T17:27:16.014Z"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

@@ -41,3 +41,4 @@ Por último dentro de la carpeta postman del proyecto, existe una colección que
 swagger local con la documentacion de todos los endpoints expuesto por la API
 
 http://localhost:8080/api
+
