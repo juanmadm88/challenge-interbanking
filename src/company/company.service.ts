@@ -9,6 +9,8 @@ import { FindQueryOptions } from '../constants/common';
 @Injectable()
 export class CompanyService {
   constructor(private utils: UtilsService, private dataSource: DataSource, private mapper: CompanyMapper) {}
+  //Lo dejo usando una transacción por si el servicio escala y mas adelante necesita insertar/updatear
+  //algun registro de alguna de las otras tablas
   async create(dto: CompanyDTO): Promise<any> {
     const queryRunner = this.dataSource.createQueryRunner();
     await queryRunner.connect();
