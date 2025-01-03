@@ -31,6 +31,30 @@ describe('VerifyPaginationInterceptor ', () => {
       expect(actualValue).toBeDefined();
       expect(callHandler.handle).toBeCalledTimes(1);
     });
+    it('expected callHandler to be called when receiving a correct format of query param', async () => {
+      const interceptor: VerifyPaginationInterceptor = new VerifyPaginationInterceptor();
+      const executionContext = {
+        switchToHttp: jest.fn().mockReturnThis(),
+        getRequest: jest.fn().mockReturnThis(),
+        getClass: jest.fn().mockReturnThis(),
+        getHandler: jest.fn().mockReturnThis(),
+        getArgs: jest.fn().mockReturnThis(),
+        getArgByIndex: jest.fn().mockReturnThis(),
+        switchToRpc: jest.fn().mockReturnThis(),
+        switchToWs: jest.fn().mockReturnThis(),
+        getType: jest.fn().mockReturnThis(),
+        getResponse: jest.fn().mockReturnThis()
+      };
+      const callHandler = {
+        handle: jest.fn().mockReturnThis()
+      };
+      (executionContext.switchToHttp().getRequest as jest.Mock<any, any>).mockReturnValueOnce({
+        query: { size: 1 }
+      });
+      const actualValue = await interceptor.intercept(executionContext, callHandler);
+      expect(actualValue).toBeDefined();
+      expect(callHandler.handle).toBeCalledTimes(1);
+    });
     it('expected an error when receiving skip param not as a valid number format ', async () => {
       const interceptor: VerifyPaginationInterceptor = new VerifyPaginationInterceptor();
       const executionContext = {
