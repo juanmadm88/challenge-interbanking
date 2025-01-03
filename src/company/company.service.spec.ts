@@ -10,7 +10,7 @@ describe('CompanyService', () => {
   let service: CompanyService;
   const mockedUtilsService = {
     buildDTO: jest.fn(),
-    buildOptions: jest.fn()
+    buildDbOptions: jest.fn()
   };
   const mockedManager = {
     save: jest.fn(),
